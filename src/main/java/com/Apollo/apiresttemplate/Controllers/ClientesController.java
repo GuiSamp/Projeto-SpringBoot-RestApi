@@ -52,6 +52,7 @@ public class ClientesController {
     public ResponseEntity<String> totalClientes(){
         ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
         String respostaTratada = clienteService.buscarTotal(response);
+
         return ResponseEntity.ok(respostaTratada);
     }
 
@@ -59,6 +60,7 @@ public class ClientesController {
     public ResponseEntity<String> tipoPessoa(){
         ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
         String respostaTratada = clienteService.buscarTipoPessoa(response);
+
         return ResponseEntity.ok(respostaTratada);
     }
 
@@ -66,6 +68,7 @@ public class ClientesController {
     public ResponseEntity<String> buscarEstados(){
         ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
         String respostaTratada = clienteService.buscarEstado(response);
+        
         return ResponseEntity.ok(respostaTratada);
     }
 
