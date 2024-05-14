@@ -48,6 +48,19 @@
           "estado": "BA",
           "cep": "44380-000"
         }
+      },
+      {
+        "id": "4",
+        "nomeCliente": "Gabriel",
+        "tipoPessoa": "J",
+        "cpfCnpj": "77777777777",
+        "endereco":{
+          "logradouro": "Rua Exemplo",
+          "bairro": "Centro",
+          "cidade": "Cruz",
+          "estado": "SP",
+          "cep": "44380-000"
+        }
       }
 
     ]

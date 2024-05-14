@@ -62,4 +62,11 @@ public class ClientesController {
         return ResponseEntity.ok(respostaTratada);
     }
 
+    @GetMapping("clientes/resumo/estado")
+    public ResponseEntity<String> buscarEstados(){
+        ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
+        String respostaTratada = clienteService.buscarEstado(response);
+        return ResponseEntity.ok(respostaTratada);
+    }
+
 }

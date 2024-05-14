@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ClienteServices {
@@ -88,10 +90,10 @@ public class ClienteServices {
                     tipoPessoaoObject.put("F", totalFisica);
                     tipoPessoaoObject.put("J", totalJuridica);
 
-                    ObjectNode objectNode = objectMapper.createObjectNode();
-                    objectNode.put("TipoPessoa", tipoPessoaoObject);
+                    ObjectNode objectResponse = objectMapper.createObjectNode();
+                    objectResponse.put("TipoPessoa", tipoPessoaoObject);
 
-                    return objectNode.toString();
+                    return objectResponse.toString();
                 } 
             }catch(Exception e){
                 e.printStackTrace();
@@ -99,6 +101,33 @@ public class ClienteServices {
         }
         return "";
     }
+
+    public String buscarEstado(ResponseEntity<String> response){
+        if(response != null && response.getBody() != null){
+            try{
+                JsonNode node = objectMapper.readTree(response.getBody());
+                if(node.isArray()){
+                    Map<String, Integer> contagemEstados = new HashMap<>();
+
+                    for(JsonNode jsonNode : node){
+                        String estado = jsonNode.get("endereco").get("estado").asText();
+                        contagemEstados.put(estado, contagemEstados.getOrDefault(estado, 0) + 1);
+                    }
+
+                    ObjectNode objectResponse = objectMapper.createObjectNode();
+                    for(Map.Entry<String, Integer> entry : contagemEstados.entrySet()){
+                        objectResponse.put(entry.getKey(), entry.getValue());
+                    }
+
+                    return objectResponse.toString();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
+
     
 
         
