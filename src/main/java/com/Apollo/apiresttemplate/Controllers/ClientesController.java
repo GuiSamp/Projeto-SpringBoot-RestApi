@@ -55,4 +55,11 @@ public class ClientesController {
         return ResponseEntity.ok(respostaTratada);
     }
 
+    @GetMapping("clientes/resumo/tipopessoa")
+    public ResponseEntity<String> tipoPessoa(){
+        ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
+        String respostaTratada = clienteService.buscarTipoPessoa(response);
+        return ResponseEntity.ok(respostaTratada);
+    }
+
 }

@@ -64,6 +64,41 @@ public class ClienteServices {
         }
         return "";
     }
+
+    @SuppressWarnings("deprecation")
+    public String buscarTipoPessoa(ResponseEntity<String> response){
+        if(response != null && response.getBody() != null){
+            try{
+                JsonNode node = objectMapper.readTree(response.getBody());
+                if(node.isArray()){
+                    int totalFisica = 0;
+                    int totalJuridica = 0;
+
+                    for (JsonNode jsonNode : node) {
+                        String tipoPessoa = jsonNode.get("tipoPessoa").asText();
+                        if("F".equals(tipoPessoa)){
+                            totalFisica++;
+                        }
+                        else if("J".equals(tipoPessoa)){
+                            totalJuridica++;
+                        }
+                    }
+
+                    ObjectNode tipoPessoaoObject = objectMapper.createObjectNode();
+                    tipoPessoaoObject.put("F", totalFisica);
+                    tipoPessoaoObject.put("J", totalJuridica);
+
+                    ObjectNode objectNode = objectMapper.createObjectNode();
+                    objectNode.put("TipoPessoa", tipoPessoaoObject);
+
+                    return objectNode.toString();
+                } 
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
     
 
         
