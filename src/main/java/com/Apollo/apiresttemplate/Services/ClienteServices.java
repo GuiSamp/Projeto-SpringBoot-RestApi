@@ -109,6 +109,7 @@ public class ClienteServices {
         return "";
     }
 
+    @SuppressWarnings("deprecation")
     public String buscarEstado(ResponseEntity<String> response){
         if(response != null && response.getBody() != null){
             try{
@@ -122,13 +123,16 @@ public class ClienteServices {
                         contagemEstados.put(estado, contagemEstados.getOrDefault(estado, 0) + 1);
                     }
 
-                    ObjectNode objectResponse = objectMapper.createObjectNode();
+                    ObjectNode estadosObject = objectMapper.createObjectNode();
 
                     for(Map.Entry<String, Integer> entry : contagemEstados.entrySet()){
-                        objectResponse.put(entry.getKey(), entry.getValue());
+                        estadosObject.put(entry.getKey(), entry.getValue());
                     }
 
-                    return objectResponse.toString();
+                    ObjectNode responsObject = objectMapper.createObjectNode();
+                    responsObject.put("estados", estadosObject);
+                    
+                    return responsObject.toString();
                 }
 
             } catch (Exception e) {
