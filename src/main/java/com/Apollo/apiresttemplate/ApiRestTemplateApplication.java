@@ -11,8 +11,9 @@ public class ApiRestTemplateApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiRestTemplateApplication.class, args);
 	}
+    
  @Bean
-    public RestTemplate restTemplate() {
+    public RestTemplate restTemplate(){
         return new RestTemplate();
     }
 }
