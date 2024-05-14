@@ -19,6 +19,7 @@ public class ClienteServices {
         if(response != null && response.getBody() != null){
             try{
                 JsonNode node = objectMapper.readTree(response.getBody());
+
                 if(node.isArray()){
                     for(JsonNode elemento : node){
                         if(elemento.get("id").asText().equals(idDesejado)){
@@ -26,6 +27,7 @@ public class ClienteServices {
                         }
                     }
                 }
+
             }catch(IOException e){
                 e.printStackTrace(); 
             }
@@ -37,6 +39,7 @@ public class ClienteServices {
         if(response != null && response.getBody() != null){
             try{
                 JsonNode node = objectMapper.readTree(response.getBody());
+
                 if(node.isArray()){
                     for(JsonNode elemento : node){
                         if(elemento.get("cpfCnpj").asText().equals(cpfDesejado)){
@@ -44,6 +47,7 @@ public class ClienteServices {
                         }
                     }
                 }
+
             }catch(IOException e){
                 e.printStackTrace(); 
             }
@@ -55,11 +59,13 @@ public class ClienteServices {
         if(response != null && response.getBody() != null){
             try{
                 JsonNode node = objectMapper.readTree(response.getBody());
+
                 if(node.isArray()){
                     ObjectNode responseObject = objectMapper.createObjectNode();
                     responseObject.put("totalClientes", node.size());
                     return responseObject.toString();
                 }
+
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -72,16 +78,16 @@ public class ClienteServices {
         if(response != null && response.getBody() != null){
             try{
                 JsonNode node = objectMapper.readTree(response.getBody());
+
                 if(node.isArray()){
                     int totalFisica = 0;
                     int totalJuridica = 0;
 
-                    for (JsonNode jsonNode : node) {
-                        String tipoPessoa = jsonNode.get("tipoPessoa").asText();
+                    for (JsonNode elemento : node) {
+                        String tipoPessoa = elemento.get("tipoPessoa").asText();
                         if("F".equals(tipoPessoa)){
                             totalFisica++;
-                        }
-                        else if("J".equals(tipoPessoa)){
+                        } else if("J".equals(tipoPessoa)){
                             totalJuridica++;
                         }
                     }
@@ -95,6 +101,7 @@ public class ClienteServices {
 
                     return objectResponse.toString();
                 } 
+
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -106,21 +113,24 @@ public class ClienteServices {
         if(response != null && response.getBody() != null){
             try{
                 JsonNode node = objectMapper.readTree(response.getBody());
+
                 if(node.isArray()){
                     Map<String, Integer> contagemEstados = new HashMap<>();
 
-                    for(JsonNode jsonNode : node){
-                        String estado = jsonNode.get("endereco").get("estado").asText();
+                    for(JsonNode elemento : node){
+                        String estado = elemento.get("endereco").get("estado").asText();
                         contagemEstados.put(estado, contagemEstados.getOrDefault(estado, 0) + 1);
                     }
 
                     ObjectNode objectResponse = objectMapper.createObjectNode();
+
                     for(Map.Entry<String, Integer> entry : contagemEstados.entrySet()){
                         objectResponse.put(entry.getKey(), entry.getValue());
                     }
 
                     return objectResponse.toString();
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
