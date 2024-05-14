@@ -1,0 +1,54 @@
+{
+    "projetos": [
+      {
+        "id": 1,
+        "nome": "Alura Tracker 3.0"
+      },
+      {
+        "id": 2,
+        "nome": "ByteBank 2.0"
+      }
+    ],
+    "Clientes": [
+      {
+        "id": "1",
+        "nomeCliente": "Guilherme",
+        "tipoPessoa": "F",
+        "cpfCnpj": "123456789",
+        "endereco":{
+          "logradouro": "Rua Exemplo",
+          "bairro": "Centro",
+          "cidade": "Amargosa",
+          "estado": "BA",
+          "cep": "45300-000"
+        }
+      },
+      {
+        "id": "2",
+        "nomeCliente": "Rian",
+        "tipoPessoa": "F",
+        "cpfCnpj": "99999999999",
+        "endereco":{
+          "logradouro": "Rua Exemplo",
+          "bairro": "Centro",
+          "cidade": "Cruz",
+          "estado": "BA",
+          "cep": "44380-000"
+        }
+      },
+      {
+        "id": "3",
+        "nomeCliente": "Marcelo",
+        "tipoPessoa": "F",
+        "cpfCnpj": "88888888888",
+        "endereco":{
+          "logradouro": "Rua Exemplo",
+          "bairro": "Centro",
+          "cidade": "Cruz",
+          "estado": "BA",
+          "cep": "44380-000"
+        }
+      }
+
+    ]
+  }
