@@ -48,4 +48,11 @@ public class ClientesController {
         return ResponseEntity.ok(respostaTratada);
     }
 
+    @GetMapping("clientes/resumo/total")
+    public ResponseEntity<String> totalClientes(){
+        ResponseEntity<String> response = restTemplate.getForEntity(API_URL, String.class);
+        String respostaTratada = clienteService.buscarTotal(response);
+        return ResponseEntity.ok(respostaTratada);
+    }
+
 }

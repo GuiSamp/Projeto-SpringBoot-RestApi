@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.io.IOException;
 
 @Service
@@ -22,7 +24,7 @@ public class ClienteServices {
                         }
                     }
                 }
-            }catch(IOException e) {
+            }catch(IOException e){
                 e.printStackTrace(); 
             }
         }
@@ -40,12 +42,30 @@ public class ClienteServices {
                         }
                     }
                 }
-            }catch(IOException e) {
+            }catch(IOException e){
                 e.printStackTrace(); 
             }
         }
         return "";
     }
+
+    public String buscarTotal(ResponseEntity<String> response){
+        if(response != null && response.getBody() != null){
+            try{
+                JsonNode node = objectMapper.readTree(response.getBody());
+                if(node.isArray()){
+                    ObjectNode responseObject = objectMapper.createObjectNode();
+                    responseObject.put("totalClientes", node.size());
+                    return responseObject.toString();
+                }
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
+    
+
         
 }
 
